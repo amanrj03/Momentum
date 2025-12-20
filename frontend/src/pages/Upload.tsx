@@ -105,16 +105,16 @@ const Upload = () => {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("video/")) {
-        toast.error("❌ Invalid File: Please select a valid video file");
+        toast.error("Invalid File: Please select a valid video file");
         return;
       }
       if (file.size > 500 * 1024 * 1024) {
-        toast.error("❌ File Too Large: Video file size must be less than 500MB");
+        toast.error("File Too Large: Video file size must be less than 500MB");
         return;
       }
       setVideoFile(file);
       setVideoProgress(null);
-      toast.success("✅ Video file selected successfully");
+      toast.success("Video file selected successfully");
     }
   };
 
@@ -122,16 +122,16 @@ const Upload = () => {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        toast.error("❌ Invalid File: Please select a valid image file");
+        toast.error("Invalid File: Please select a valid image file");
         return;
       }
       if (file.size > 10 * 1024 * 1024) {
-        toast.error("❌ File Too Large: Thumbnail file size must be less than 10MB");
+        toast.error("File Too Large: Thumbnail file size must be less than 10MB");
         return;
       }
       setThumbnailFile(file);
       setThumbnailProgress(null);
-      toast.success("✅ Thumbnail selected successfully");
+      toast.success("Thumbnail selected successfully");
     }
   };
 
@@ -160,7 +160,7 @@ const Upload = () => {
     setIsUploading(true);
     
     // Show warning toast
-    toast.warning("⚠️ Upload in progress! Please don't leave this page until the upload is complete.", {
+    toast.warning("Upload in progress! Please don't leave this page until the upload is complete.", {
       duration: 5000,
     });
 
@@ -184,7 +184,7 @@ const Upload = () => {
       const saveResponse = await apiClient.createVideo(videoData);
       
       if (saveResponse.success) {
-        toast.success("✅ Video uploaded successfully! It's now pending review.");
+        toast.success("Video uploaded successfully! It's now pending review.");
         navigate("/dashboard");
       } else {
         throw new Error(saveResponse.error || "Failed to save video");
@@ -192,7 +192,7 @@ const Upload = () => {
     } catch (error) {
       console.error("Upload error:", error);
       const errorMessage = error instanceof Error ? error.message : "Failed to upload video. Please try again.";
-      toast.error(`❌ Upload Failed: ${errorMessage}`);
+      toast.error(`Upload Failed: ${errorMessage}`);
     } finally {
       setIsUploading(false);
     }

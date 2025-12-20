@@ -26,6 +26,7 @@ import LikedVideos from "./pages/LikedVideos";
 import SavedVideos from "./pages/SavedVideos";
 import CreatorProfile from "./pages/CreatorProfile";
 import VideoPlayerPage from "./pages/VideoPlayer";
+import AskAI from "./pages/AskAI";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -86,6 +87,11 @@ const App = () => (
               <Route path="/saved-videos" element={
                 <ProtectedRoute allowedRoles={["VIEWER"]}>
                   <SavedVideos />
+                </ProtectedRoute>
+              } />
+              <Route path="/ask-ai" element={
+                <ProtectedRoute allowedRoles={["VIEWER"]}>
+                  <AskAI />
                 </ProtectedRoute>
               } />
             </Route>

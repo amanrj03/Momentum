@@ -91,7 +91,7 @@ export function OTPVerification({ email, role, registrationData, onBack }: OTPVe
       });
 
       if (response.success) {
-        toast.success("✅ Email verified successfully! Your account has been created. You can now sign in.");
+        toast.success("Email verified successfully! Your account has been created. You can now sign in.");
         navigate("/login");
       } else {
         toast.error(`❌ Verification failed: ${response.error || "Invalid OTP. Please try again."}`);
@@ -113,7 +113,7 @@ export function OTPVerification({ email, role, registrationData, onBack }: OTPVe
       const response = await apiClient.resendOtp({ email, role });
 
       if (response.success) {
-        toast.success("✅ OTP sent! A new OTP has been sent to your email.");
+        toast.success("OTP sent! A new OTP has been sent to your email.");
         setTimeLeft(300); // Reset timer
         setOtp(["", "", "", "", "", ""]);
         inputRefs.current[0]?.focus();

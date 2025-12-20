@@ -32,7 +32,7 @@ export function isDatabaseConnected(): boolean {
 // Initialize connection check
 checkDatabaseConnection().then((connected) => {
   if (connected) {
-    console.log("✅ Database connection established");
+    console.log("Database connection established");
   } else {
     console.error("❌ Database connection failed - Server will continue but database operations may fail");
   }

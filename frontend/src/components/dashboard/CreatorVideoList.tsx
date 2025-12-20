@@ -85,7 +85,7 @@ export function CreatorVideoList({ videos, onVideoUpdate, totalVideos = 0, isFil
       const response = await apiClient.deleteVideo(videoToDelete.id);
       
       if (response.success) {
-        toast.success("✅ Video deleted successfully");
+        toast.success("Video deleted successfully");
         // Call the update callback to refresh the video list
         if (onVideoUpdate) {
           onVideoUpdate();

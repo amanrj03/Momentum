@@ -3,17 +3,13 @@ import AdminDashboard from "@/components/dashboard/AdminDashboard";
 import CreatorDashboard from "@/components/dashboard/CreatorDashboard";
 import ViewerDashboard from "@/components/dashboard/ViewerDashboard";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
-import { Loader2 } from "lucide-react";
+import { LoadingScreen } from "@/components/common/LoadingScreen";
 
 const Dashboard = () => {
   const { user, isLoading } = useAuth();
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   if (!user) {

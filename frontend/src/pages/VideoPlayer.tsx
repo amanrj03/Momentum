@@ -31,12 +31,12 @@ const VideoPlayerPage = () => {
       if (response.success && response.data) {
         setVideo(response.data as Video);
       } else {
-        toast.error("❌ Video not found");
+        toast.error("Video not found");
         navigate(-1);
       }
     } catch (error) {
       console.error("Error fetching video:", error);
-      toast.error("❌ Failed to load video");
+      toast.error("Failed to load video");
       navigate(-1);
     } finally {
       setIsLoading(false);
@@ -85,19 +85,21 @@ const VideoPlayerPage = () => {
     <div className="min-h-screen bg-background">
       <Header title={video.title} />
       
-      <div className="container mx-auto px-4 py-6">
+      <div className="container mx-auto px-0 py-0">
         {/* Back Button */}
-        <Button
-          variant="ghost"
-          onClick={handleClose}
-          className="mb-4 text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back
-        </Button>
+        <div className="px-4 py-4">
+          <Button
+            variant="ghost"
+            onClick={handleClose}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back
+          </Button>
+        </div>
 
         {/* Video Player */}
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-full mx-auto px-0">
           {isAdmin ? (
             <AdminVideoPlayer video={video} onClose={handleClose} />
           ) : (

@@ -749,7 +749,7 @@ router.get("/me", authenticateToken, async (req, res) => {
 router.put("/profile", authenticateToken, async (req, res) => {
   try {
     const userId = req.user?.id;
-    const { full_name, bio, country, avatar_url, linkedin_url, youtube_url, website_url } = req.body;
+    const { full_name, bio, country, avatar_url, channel_name, linkedin_url, youtube_url, website_url } = req.body;
 
     if (!userId) {
       return res.status(401).json({
@@ -790,6 +790,7 @@ router.put("/profile", authenticateToken, async (req, res) => {
     
     // Creator-specific fields
     if (user.role === "CREATOR") {
+      if (channel_name !== undefined) updateData.channel_name = channel_name || null;
       if (linkedin_url !== undefined) updateData.linkedin_url = linkedin_url || null;
       if (youtube_url !== undefined) updateData.youtube_url = youtube_url || null;
       if (website_url !== undefined) updateData.website_url = website_url || null;

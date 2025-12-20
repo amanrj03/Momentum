@@ -14,6 +14,7 @@ import {
   Play,
   ChevronLeft,
   ChevronRight,
+  Bot,
 } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -76,6 +77,7 @@ export const Sidebar = ({ className, sharedTransition }: SidebarProps) => {
         { to: "/watch-history", icon: History, label: "Watch History" },
         { to: "/liked-videos", icon: Heart, label: "Liked Videos" },
         { to: "/saved-videos", icon: Bookmark, label: "Saved Videos" },
+        { to: "/ask-ai", icon: Bot, label: "Ask Momentum AI" },
         { to: "/settings", icon: Settings, label: "Settings" },
       ];
     } else if (user?.role === "CREATOR") {

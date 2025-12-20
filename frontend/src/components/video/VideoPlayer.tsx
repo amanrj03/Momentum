@@ -147,18 +147,18 @@ export function VideoPlayer({ video, onClose }: VideoPlayerProps) {
   const handleLike = async () => {
     await toggleLike(video);
     if (isLiked) {
-      toast.success("✅ Removed from liked videos");
+      toast.success("Removed from liked videos");
     } else {
-      toast.success("✅ Added to liked videos");
+      toast.success("Added to liked videos");
     }
   };
 
   const handleSave = async () => {
     await toggleSave(video);
     if (isSaved) {
-      toast.success("✅ Removed from saved videos");
+      toast.success("Removed from saved videos");
     } else {
-      toast.success("✅ Added to saved videos");
+      toast.success("Added to saved videos");
     }
   };
 

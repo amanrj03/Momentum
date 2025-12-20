@@ -23,10 +23,10 @@ export default function Login() {
   const onSubmit = async (data: LoginInput) => {
     const result = await login(data.email, data.password);
     if (result.success) {
-      toast.success("✅ Welcome back! Login successful");
+      toast.success("Welcome back! Login successful");
       navigate("/dashboard");
     } else {
-      toast.error(`❌ Login failed: ${result.error}`);
+      toast.error(`Login failed: ${result.error}`);
     }
   };
 

@@ -2,7 +2,6 @@ import { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { VideoCard } from "@/components/video/VideoCard";
-import { SearchBar } from "@/components/video/SearchBar";
 import { Header } from "@/components/layout/Header";
 import { Video } from "@/lib/types";
 import { apiClient } from "@/lib/api";
@@ -57,7 +56,16 @@ export function UserPortal() {
         });
         
         setVideos(prev => {
-          const updated = reset ? newVideos : [...prev, ...newVideos];
+          let updated;
+          if (reset || page === 1) {
+            // Reset: replace all videos with new ones
+            updated = newVideos;
+          } else {
+            // Append: add new videos to existing ones, avoiding duplicates
+            const existingIds = new Set(prev.map(v => v.id));
+            const uniqueNewVideos = newVideos.filter(v => !existingIds.has(v.id));
+            updated = [...prev, ...uniqueNewVideos];
+          }
           console.log(`📹 Videos updated: ${prev.length} -> ${updated.length}`);
           return updated;
         });
@@ -92,7 +100,7 @@ export function UserPortal() {
     });
     
     if (!loadingMore && hasMore && !searchQuery && selectedCategory === "All") {
-      console.log(`✅ Loading page ${currentPage + 1}`);
+      console.log(`Loading page ${currentPage + 1}`);
       fetchVideos(currentPage + 1, false);
     } else {
       console.log(`❌ Load more blocked`);
@@ -240,17 +248,15 @@ export function UserPortal() {
 
   return (
     <div className="min-h-screen">
-      <Header title="Discover" />
-
-      {/* Search Section */}
-      <div className="sticky top-16 z-30 bg-background/80 backdrop-blur-xl border-b border-border/50 px-6 py-4">
-        <SearchBar
-          onSearch={setSearchQuery}
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-        />
-      </div>
+      <Header 
+        title="Discover" 
+        showSearch={true}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+      />
 
       <main className="p-6 space-y-10">
         {/* Trending Section - Only show if no search/filter and we have videos */}

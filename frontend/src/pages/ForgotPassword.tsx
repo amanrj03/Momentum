@@ -73,12 +73,12 @@ export default function ForgotPassword() {
         setEmail(data.email);
         setCurrentStep("otp");
         setTimeLeft(300);
-        toast.success(`✅ OTP sent! We've sent a verification code to ${data.email}`);
+        toast.success(`OTP sent! We've sent a verification code to ${data.email}`);
       } else {
-        toast.error(`❌ Failed to send OTP: ${response.error || "Please check your email and try again."}`);
+        toast.error(`Failed to send OTP: ${response.error || "Please check your email and try again."}`);
       }
     } catch (error) {
-      toast.error("❌ Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -125,7 +125,7 @@ export default function ForgotPassword() {
     const otpCode = otp.join("");
     
     if (otpCode.length !== 6) {
-      toast.error("❌ Invalid OTP: Please enter all 6 digits");
+      toast.error("Invalid OTP: Please enter all 6 digits");
       return;
     }
 
@@ -139,15 +139,15 @@ export default function ForgotPassword() {
 
       if (response.success) {
         setCurrentStep("password");
-        toast.success("✅ OTP verified! Now you can set a new password.");
+        toast.success("OTP verified! Now you can set a new password.");
       } else {
-        toast.error(`❌ Verification failed: ${response.error || "Invalid OTP. Please try again."}`);
+        toast.error(`Verification failed: ${response.error || "Invalid OTP. Please try again."}`);
         setOtp(["", "", "", "", "", ""]);
         const firstInput = document.getElementById("forgot-otp-0");
         firstInput?.focus();
       }
     } catch (error) {
-      toast.error("❌ Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -164,10 +164,10 @@ export default function ForgotPassword() {
       });
 
       if (response.success) {
-        toast.success("✅ Password reset successful! You can now sign in with your new password.");
+        toast.success("Password reset successful! You can now sign in with your new password.");
         navigate("/login");
       } else {
-        toast.error(`❌ Password reset failed: ${response.error || "Please try again."}`);
+        toast.error(`Password reset failed: ${response.error || "Please try again."}`);
       }
     } catch (error) {
       toast.error("❌ Something went wrong. Please try again.");
@@ -183,16 +183,16 @@ export default function ForgotPassword() {
       const response = await apiClient.sendForgotPasswordOtp({ email });
 
       if (response.success) {
-        toast.success("✅ OTP sent! A new OTP has been sent to your email.");
+        toast.success("OTP sent! A new OTP has been sent to your email.");
         setTimeLeft(300);
         setOtp(["", "", "", "", "", ""]);
         const firstInput = document.getElementById("forgot-otp-0");
         firstInput?.focus();
       } else {
-        toast.error(`❌ Failed to resend OTP: ${response.error || "Please try again later."}`);
+        toast.error(`Failed to resend OTP: ${response.error || "Please try again later."}`);
       }
     } catch (error) {
-      toast.error("❌ Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setIsResending(false);
     }

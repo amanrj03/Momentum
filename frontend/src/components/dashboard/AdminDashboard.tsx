@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Header } from "@/components/layout/Header";
+import { LoadingScreen } from "@/components/common/LoadingScreen";
 import { StatsCard } from "@/components/dashboard/StatsCard";
 import { AdminVideoPlayer } from "@/components/video/AdminVideoPlayer";
 import { apiClient } from "@/lib/api";
@@ -185,7 +186,7 @@ const AdminDashboard = () => {
       setUpdatingVideoId(videoId);
       const response = await apiClient.updateVideoStatus(videoId, action);
       if (response.success) {
-        toast.success(`✅ Video ${action.toLowerCase()} successfully`);
+        toast.success(`Video ${action.toLowerCase()} successfully`);
         
         if (currentView === 'videos') {
           setAllVideos(prevVideos => 
@@ -255,21 +256,7 @@ const AdminDashboard = () => {
     return (
       <div className="min-h-screen bg-background">
         <Header title="Admin Dashboard" />
-        <div className="flex items-center justify-center h-96">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="flex flex-col items-center gap-4"
-          >
-            <div className="relative">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-accent animate-spin" style={{ animationDuration: '2s' }}>
-                <div className="absolute inset-1 rounded-full bg-background" />
-              </div>
-              <Sparkles className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-primary" />
-            </div>
-            <p className="text-muted-foreground">Loading dashboard...</p>
-          </motion.div>
-        </div>
+        <LoadingScreen message="Loading dashboard..." fullScreen={false} />
       </div>
     );
   }
@@ -328,19 +315,19 @@ const AdminDashboard = () => {
                   exit={{ opacity: 0, y: -20 }}
                   className="space-y-8"
                 >
-                  {/* Stats Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {stats.map((stat, index) => (
-                      <motion.div
-                        key={stat.title}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                      >
-                        <StatsCard {...stat} />
-                      </motion.div>
-                    ))}
-                  </div>
+                  {/* Stats Grid - Merged into single box */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="bg-card/50 backdrop-blur-sm rounded-2xl border border-border/50"
+                  >
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                      {stats.map((stat, index) => (
+                        <StatsCard key={stat.title} {...stat} />
+                      ))}
+                    </div>
+                  </motion.div>
 
                   {/* Pending Reviews */}
                   <motion.div

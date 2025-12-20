@@ -38,6 +38,7 @@ export const ProfileSettings = ({ defaultValues }: ProfileSettingsProps) => {
       country: "",
       avatar_url: "",
       ...(isCreator && {
+        channel_name: "",
         linkedin_url: "",
         youtube_url: "",
         website_url: "",
@@ -74,7 +75,7 @@ export const ProfileSettings = ({ defaultValues }: ProfileSettingsProps) => {
       
       if (response.success && response.data) {
         updateUser(response.data);
-        toast.success("✅ Profile updated successfully!");
+        toast.success("Profile updated successfully!");
       } else {
         toast.error("❌ Failed to update profile");
       }
@@ -201,7 +202,34 @@ export const ProfileSettings = ({ defaultValues }: ProfileSettingsProps) => {
           {/* Creator-specific fields */}
           {isCreator && (
             <div className="space-y-6 pt-4 border-t border-border/50">
-              <h4 className="font-medium text-sm text-muted-foreground">Social Links</h4>
+              <h4 className="font-medium text-sm text-muted-foreground">Creator Information</h4>
+              
+              {/* Channel Name */}
+              <FormField
+                control={form.control}
+                name="channel_name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="flex items-center gap-2">
+                      <Globe2 className="w-4 h-4 text-accent" />
+                      Channel Name
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Your channel name"
+                        className="bg-secondary/50 border-border/50 focus:border-primary rounded-xl h-11"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription className="text-xs">
+                      Your unique channel name (letters, numbers, hyphens, underscores)
+                    </FormDescription>
+                    <FormMessage className="text-destructive" />
+                  </FormItem>
+                )}
+              />
+
+              <h4 className="font-medium text-sm text-muted-foreground pt-2">Social Links</h4>
               
               {/* LinkedIn URL */}
               <FormField

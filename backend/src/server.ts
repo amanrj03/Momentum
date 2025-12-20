@@ -8,6 +8,7 @@ import "./lib/dbHealthCheck"; // Initialize database health check
 import authRoutes from "./routes/auth";
 import videoRoutes from "./routes/videos";
 import profileRoutes from "./routes/profile";
+import aiRoutes from "./routes/ai";
 
 import analyticsRoutes from "./routes/analytics";
 import interactionsRoutes from "./routes/interactions";
@@ -53,6 +54,7 @@ if (config.NODE_ENV === "development") {
 app.use("/api/auth", authRoutes);
 app.use("/api/videos", videoRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api/ai", aiRoutes);
 
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/interactions", interactionsRoutes);

@@ -44,7 +44,7 @@ export function VideoCard({ video, onClick, showStatus = false }: VideoCardProps
       onHoverEnd={() => setIsHovered(false)}
     >
       <Card
-        className="overflow-hidden group cursor-pointer hover:shadow-lg transition-all duration-300 border-border bg-card"
+        className="overflow-hidden group cursor-pointer hover:shadow-lg transition-all duration-300 border-border bg-card h-full flex flex-col"
         onClick={onClick}
       >
         {/* Thumbnail */}
@@ -104,26 +104,27 @@ export function VideoCard({ video, onClick, showStatus = false }: VideoCardProps
         </div>
 
         {/* Content */}
-        <div className="p-4 space-y-3">
-          <div className="flex gap-3">
+        <div className="p-4 space-y-1 flex-1 flex flex-col">
+          {/* Title */}
+          <h3 className="font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors min-h-[3.5rem]">
+            {video.title}
+          </h3>
+
+          {/* Channel Info */}
+          <div className="flex gap-3 items-center mt-2">
             {/* Avatar */}
             <img
               src={(video.uploader as any)?.creatorProfile?.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent((video.uploader as any)?.creatorProfile?.channel_name || (video.uploader as any)?.creatorProfile?.full_name || 'Creator')}&background=f97316&color=fff`}
               alt={(video.uploader as any)?.creatorProfile?.channel_name || (video.uploader as any)?.creatorProfile?.full_name || 'Creator'}
-              className="w-10 h-10 rounded-full object-cover ring-2 ring-border"
+              className="w-8 h-8 rounded-full object-cover ring-2 ring-border flex-shrink-0"
             />
             
-            <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors">
-                {video.title}
-              </h3>
-              <p className="text-sm text-muted-foreground mt-1">
-                {(video.uploader as any)?.creatorProfile?.channel_name || (video.uploader as any)?.creatorProfile?.full_name || 'Creator'}
-              </p>
-            </div>
+            <p className="text-sm text-muted-foreground truncate">
+              {(video.uploader as any)?.creatorProfile?.channel_name || (video.uploader as any)?.creatorProfile?.full_name || 'Creator'}
+            </p>
           </div>
 
-          <div className="flex items-center justify-between text-sm text-muted-foreground">
+          <div className="flex items-center justify-between text-sm text-muted-foreground mt-auto">
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1">
                 <Eye className="w-4 h-4" />

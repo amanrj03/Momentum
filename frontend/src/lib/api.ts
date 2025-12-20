@@ -148,6 +148,7 @@ class ApiClient {
     bio?: string;
     country?: string;
     avatar_url?: string;
+    channel_name?: string;
     linkedin_url?: string;
     youtube_url?: string;
     website_url?: string;
@@ -403,6 +404,14 @@ class ApiClient {
 
   async getCreatorVideos(creatorId: string, page = 1, limit = 20) {
     return this.request(`/creators/${creatorId}/videos?page=${page}&limit=${limit}`);
+  }
+
+  // AI endpoints
+  async askAI(message: string) {
+    return this.request("/ai/ask", {
+      method: "POST",
+      body: JSON.stringify({ message }),
+    });
   }
 }
 

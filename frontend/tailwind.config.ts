@@ -97,6 +97,10 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "message-in": {
+          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -106,10 +110,13 @@ export default {
         float: "float 3s ease-in-out infinite",
         "pulse-slow": "pulse-slow 4s ease-in-out infinite",
         shimmer: "shimmer 2s linear infinite",
+        "message-in": "message-in 0.3s ease-out forwards",
       },
       boxShadow: {
         glow: "0 0 40px -10px hsl(var(--primary) / 0.5)",
         "glow-lg": "0 0 60px -10px hsl(var(--primary) / 0.4)",
+        soft: "0 4px 12px -2px hsl(var(--foreground) / 0.08)",
+        elegant: "0 10px 30px -5px hsl(var(--primary) / 0.15)",
       },
     },
   },

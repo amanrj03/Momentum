@@ -108,6 +108,13 @@ export const userProfileSchema = z.object({
 // Creator Profile Schema (extends user profile with additional fields)
 export const creatorProfileSchema = z.object({
   full_name: nameSchema,
+  channel_name: z
+    .string()
+    .min(2, "Channel name must be at least 2 characters")
+    .max(100, "Channel name must be less than 100 characters")
+    .regex(/^[a-zA-Z0-9\s\-_]+$/, "Channel name can only contain letters, numbers, spaces, hyphens, and underscores")
+    .optional()
+    .or(z.literal("")),
   bio: z
     .string()
     .max(500, "Bio must be less than 500 characters")

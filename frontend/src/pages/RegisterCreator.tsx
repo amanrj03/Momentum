@@ -45,12 +45,12 @@ export default function RegisterCreator() {
       if (response.success) {
         setRegistrationData(data);
         setShowOtpVerification(true);
-        toast.success(`✅ OTP sent! We've sent a verification code to ${data.email}`);
+        toast.success(`OTP sent! We've sent a verification code to ${data.email}`);
       } else {
-        toast.error(`❌ Registration failed: ${response.error || "Failed to send verification email"}`);
+        toast.error(`Registration failed: ${response.error || "Failed to send verification email"}`);
       }
     } catch (error) {
-      toast.error("❌ Registration failed: Something went wrong. Please try again.");
+      toast.error("Registration failed: Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
     }

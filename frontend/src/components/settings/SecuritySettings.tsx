@@ -92,12 +92,12 @@ export function SecuritySettings() {
       if (response.success) {
         setShowOtpVerification(true);
         setTimeLeft(300);
-        toast.success(`✅ OTP sent! We've sent a verification code to ${user?.email}`);
+        toast.success(`OTP sent! We've sent a verification code to ${user?.email}`);
       } else {
-        toast.error(`❌ Failed to send OTP: ${response.error || "Please try again later."}`);
+        toast.error(`Failed to send OTP: ${response.error || "Please try again later."}`);
       }
     } catch (error) {
-      toast.error("❌ Something went wrong. Please try again.");
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -107,7 +107,7 @@ export function SecuritySettings() {
     const otpCode = otp.join("");
     
     if (otpCode.length !== 6) {
-      toast.error("❌ Invalid OTP: Please enter all 6 digits");
+      toast.error("Invalid OTP: Please enter all 6 digits");
       return;
     }
 
@@ -123,14 +123,14 @@ export function SecuritySettings() {
       });
 
       if (response.success) {
-        toast.success("✅ Password changed successfully! Your password has been updated.");
+        toast.success("Password changed successfully! Your password has been updated.");
         
         form.reset();
         setShowOtpVerification(false);
         setOtp(["", "", "", "", "", ""]);
         setPasswordData(null);
       } else {
-        toast.error(`❌ Password change failed: ${response.error || "Invalid OTP or current password."}`);
+        toast.error(`Password change failed: ${response.error || "Invalid OTP or current password."}`);
         setOtp(["", "", "", "", "", ""]);
       }
     } catch (error) {
@@ -147,7 +147,7 @@ export function SecuritySettings() {
       const response = await apiClient.sendPasswordChangeOtp();
 
       if (response.success) {
-        toast.success("✅ OTP sent! A new OTP has been sent to your email.");
+        toast.success("OTP sent! A new OTP has been sent to your email.");
         setTimeLeft(300);
         setOtp(["", "", "", "", "", ""]);
       } else {
