@@ -43,15 +43,6 @@ Momentum is a comprehensive video platform designed specifically for entrepreneu
   <em>Comprehensive admin dashboard with platform analytics and management tools</em>
 </div>
 
-### 📱 Mobile Experience
-<div align="center">
-  <img src="screenshots/mobile-landing.png" alt="Mobile Landing" width="250"/>
-  <img src="screenshots/mobile-dashboard.png" alt="Mobile Dashboard" width="250"/>
-  <img src="screenshots/mobile-ai-chat.png" alt="Mobile AI Chat" width="250"/>
-  <br/>
-  <em>Fully responsive design optimized for mobile devices</em>
-</div>
-
 ---
 
 ## 🛠️ Tech Stack
